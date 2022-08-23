@@ -404,6 +404,8 @@ def fold_v_matrix(
         assert callable(
             method
         ), "Method must be a valid method name for scipy.optimize.minimize or a minimizer"
+        if "cv_seed" in kwargs:
+            del kwargs["cv_seed"]
         opt = method(_score, start.copy(), jac=_grad, **kwargs)
     v_mat = diag(opt.x)
     # CALCULATE weights AND ts_score
